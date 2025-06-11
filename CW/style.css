@@ -1,0 +1,88 @@
+body {
+  font-family: Arial, sans-serif; /* Шрифт */
+  background-color: #2c3e50; /* Темний фон */
+  margin: 0; /* Зовнішні відступи */
+  padding: 0 20px 0 40px; /* Внутрішні відступи */
+  color: #ecf0f1; /* Колір тексту */
+}
+
+.container {
+  max-width: 700px; /* Максимальна ширина блоку */
+  margin: 40px auto; /* Відступ зверху + вирівнювання по центру */
+  background-color: #34495e; /* Темний фон контейнера */
+  padding: 30px; /* Відступ всередині блоку */
+  border-radius: 12px; /* Заокруглені кути */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Тінь для об'єму */
+}
+
+h1 {
+  text-align: center; /* Вирівнювання заголовка по центру */
+  color: #ecf0f1; /* Колір заголовка */
+  margin-bottom: 20px; /* Відступ знизу */
+}
+
+label {
+  display: block; /* Блочне відображення (з нового рядка) */
+  margin-top: 12px; /* Відступ зверху */
+  font-weight: bold; /* Жирний текст */
+  font-size: 14px; /* Розмір шрифту */
+  color: #bdc3c7; /* Світло-сірий колір */
+}
+
+input, select {
+  padding: 4px 6px; /* Внутрішній відступ */
+  margin: 6px 0; /* Відступи зверху і знизу */
+  border-radius: 5px; /* Заокруглення кутів */
+  border: 1px solid #7f8c8d; /* Сіра рамка */
+  font-size: 14px; /* Розмір шрифту */
+  width: 280px; /* Ширина поля */
+  height: 28px; /* Висота поля */
+  box-sizing: border-box; /* Включає padding у розмір елемента */
+  background-color: #ecf0f1; /* Світлий фон поля */
+  color: #2c3e50; /* Темний текст */
+}
+
+button {
+  padding: 6px 12px; /* Внутрішній відступ */
+  font-size: 14px; /* Розмір тексту */
+  background-color: #27ae60; /* Зелений фон */
+  color: white; /* Білий текст */
+  border: none; /* Без рамки */
+  cursor: pointer; /* Курсор у вигляді руки при наведенні */
+  border-radius: 5px; /* Заокруглені кути */
+  width: auto; /* Автоматична ширина */
+  min-width: 120px; /* Мінімальна ширина */
+  margin-top: 10px; /* Відступ зверху */
+  transition: background-color 0.3s ease; /* Плавна зміна кольору */
+}
+
+button:hover {
+  background-color: #219150; /* Темніший зелений при наведенні */
+}
+
+table {
+  width: 100%; /* Таблиця займає всю ширину контейнера */
+  border-collapse: collapse; /* Видаляє проміжки між комірками */
+  margin-top: 20px; /* Відступ зверху */
+  color: #ecf0f1; /* Білий текст */
+}
+
+th, td {
+  text-align: left; /* Текст вирівнюється по лівому краю */
+  padding: 10px; /* Внутрішній відступ у комірках */
+  border-bottom: 1px solid #7f8c8d; /* Сіра лінія між рядками */
+}
+
+th {
+  background-color: #16a085; /* Бірюзовий фон для заголовків */
+  color: #ecf0f1; /* Білий текст */
+}
+
+canvas {
+  display: block; /* Виводиться як блоковий елемент */
+  margin: 30px auto 0; /* Центрування + відступ зверху */
+  max-width: 100%; /* Не виходить за межі контейнера */
+  height: 300px; /* Висота графіка */
+  background-color: #34495e; /* Темний фон для графіка */
+  border-radius: 10px; /* Заокруглені кути */
+}

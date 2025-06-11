@@ -1,0 +1,102 @@
+<!DOCTYPE html> <!-- Вказує, що це HTML5-документ -->
+<html lang="uk"> <!-- Мова сторінки — українська -->
+<head>
+  <meta charset="UTF-8" /> <!-- Кодування символів: підтримка українських букв -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Адаптація до екранів мобільних -->
+  <title>Фінансові витрати</title> <!-- Назва вкладки браузера -->
+  <link rel="stylesheet" href="style.css" /> <!-- Підключення CSS-файлу -->
+</head>
+<body>
+  <h1>Аналіз фінансових витрат</h1> <!-- Головний заголовок -->
+
+  <!-- Форма для введення витрат -->
+  <form id="expenseForm">
+    <label for="amount">Сума витрати (грн):</label>
+    <input type="number" id="amount" min="0" step="0.01" required /> <!-- Поле для введення суми -->
+
+    <label for="category">Категорія:</label>
+    <select id="category" required> <!-- Випадаючий список категорій -->
+      <option value="">Оберіть категорію</option>
+      <option value="Їжа">Їжа</option>
+      <option value="Транспорт">Транспорт</option>
+      <option value="Розваги">Розваги</option>
+      <option value="Інше">Інше</option>
+    </select>
+
+    <button type="submit">Додати витрату</button> <!-- Кнопка для додавання -->
+  </form>
+
+  <!-- Таблиця для відображення витрат -->
+  <table id="expensesTable">
+    <thead>
+      <tr><th>Категорія</th><th>Сума (грн)</th></tr>
+    </thead>
+    <tbody></tbody> <!-- Порожнє тіло таблиці, яке буде заповнюватися -->
+  </table>
+
+  <!-- Місце для графіка -->
+  <canvas id="expensesChart"></canvas>
+
+  <!-- Підключення бібліотеки Chart.js для побудови графіків -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Отримання елементів з HTML
+    const form = document.getElementById('expenseForm');
+    const tableBody = document.querySelector('#expensesTable tbody');
+    const ctx = document.getElementById('expensesChart').getContext('2d');
+
+    let expenses = []; // Масив для збереження всіх витрат
+
+    // Створення кругової діаграми
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [], // Категорії
+        datasets: [{
+          label: 'Витрати по категоріях',
+          data: [], // Дані для графіка
+          backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#a2d2ff'] // Кольори секторів
+        }]
+      }
+    });
+
+    // Подія при відправці форми
+    form.addEventListener('submit', e => {
+      e.preventDefault(); // Забороняє оновлення сторінки
+
+      // Отримання значень з форми
+      const amount = parseFloat(document.getElementById('amount').value);
+      const category = document.getElementById('category').value;
+
+      expenses.push({category, amount}); // Додавання нової витрати в масив
+      updateTable(); // Оновлення таблиці
+      updateChart(); // Оновлення графіка
+
+      form.reset(); // Очищення форми
+    });
+
+    // Функція для оновлення таблиці
+    function updateTable() {
+      tableBody.innerHTML = ''; // Очищення таблиці
+      expenses.forEach(expense => {
+        const tr = document.createElement('tr'); // Створення нового рядка
+        tr.innerHTML = `<td>${expense.category}</td><td>${expense.amount.toFixed(2)}</td>`; // Додавання даних
+        tableBody.appendChild(tr); // Додавання рядка в таблицю
+      });
+    }
+
+    // Функція для оновлення графіка
+    function updateChart() {
+      const summary = {}; // Об'єкт для збереження сум по категоріях
+      expenses.forEach(exp => {
+        summary[exp.category] = (summary[exp.category] || 0) + exp.amount;
+      });
+
+      // Оновлення даних графіка
+      chart.data.labels = Object.keys(summary); // Категорії
+      chart.data.datasets[0].data = Object.values(summary); // Суми
+      chart.update(); // Перемалювання графіка
+    }
+  </script>
+</body>
+</html>
